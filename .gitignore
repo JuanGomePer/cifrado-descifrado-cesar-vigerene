@@ -1,0 +1,29 @@
+
+---
+
+## 📄 `.gitignore`
+
+```gitignore
+# Entornos virtuales
+venv/
+.env/
+
+# Archivos temporales
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de log
+*.log
+
+# Configuraciones locales de IDE
+.vscode/
+.idea/
+
+# Otros
+*.bak
