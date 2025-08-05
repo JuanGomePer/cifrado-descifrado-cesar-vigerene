@@ -3,34 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <title>Cifrado César Web</title>
-    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #2c3e50;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #ecf0f1;
+        }
+
+        .container {
+            background-color: #34495e;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            max-width: 700px;
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 15px;
+        }
+
+        textarea, input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 4px;
+            border: 1px solid #7f8c8d;
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #7f8c8d;
+            color: #ecf0f1;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin-right: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #95a5a6;
+        }
+
+        h3 {
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            padding: 8px;
+            background-color: #2c3e50;
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+
+        a button {
+            background-color: #95a5a6;
+        }
+
+        a button:hover {
+            background-color: #7f8c8d;
+        }
+    </style>
 </head>
 <body>
-    <h1>Cifrado César</h1>
-    <form method="POST">
-        <label>Mensaje:</label><br>
-        <textarea name="mensaje" rows="4" cols="50" required></textarea><br><br>
+    <div class="container">
+        <h1>Cifrado César</h1>
+        <form method="POST">
+            <label>Mensaje:</label>
+            <textarea name="mensaje" rows="4" required></textarea>
 
-        <label>Clave (opcional para descifrado):</label><br>
-        <input type="text" name="clave"><br><br>
+            <label>Clave (opcional para descifrado):</label>
+            <input type="text" name="clave">
 
-        <button type="submit" name="accion" value="cifrar">Cifrar</button>
-        <button type="submit" name="accion" value="descifrar">Descifrar</button>
-    </form>
-    <a href="/"><button>Volver al inicio</button></a>
+            <button type="submit" name="accion" value="cifrar">Cifrar</button>
+            <button type="submit" name="accion" value="descifrar">Descifrar</button>
+        </form>
 
-    {% if resultado %}
-        <h3>Resultado:</h3>
-        <p>{{ resultado }}</p>
-    {% endif %}
+        <a href="/"><button>Volver al inicio</button></a>
 
-    {% if resultados_bruta %}
-        <h3>Resultados por Fuerza Bruta:</h3>
-        <ul>
-            {% for clave, texto in resultados_bruta %}
-                <li><strong>Clave {{ clave }}:</strong> {{ texto }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+        {% if resultado %}
+            <h3>Resultado:</h3>
+            <p>{{ resultado }}</p>
+        {% endif %}
+
+        {% if resultados_bruta %}
+            <h3>Resultados por Fuerza Bruta:</h3>
+            <ul>
+                {% for clave, texto in resultados_bruta %}
+                    <li><strong>Clave {{ clave }}:</strong> {{ texto }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
 </body>
 </html>
