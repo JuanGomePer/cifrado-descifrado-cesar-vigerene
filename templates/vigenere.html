@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Vigenère</title>
+</head>
+<body>
+    <h1>Cifrado Vigenère</h1>
+    <form method="POST">
+        <label>Mensaje:</label><br>
+        <textarea name="mensaje" rows="4" cols="50" required></textarea><br><br>
+
+        <label>Clave (opcional para descifrado):</label><br>
+        <input type="text" name="clave"><br><br>
+
+        <button type="submit" name="accion" value="cifrar">Cifrar</button>
+        <button type="submit" name="accion" value="descifrar">Descifrar</button>
+    </form>
+
+    {% if resultado %}
+        <h3>Resultado:</h3>
+        <p>{{ resultado }}</p>
+    {% endif %}
+
+    {% if resultados_bruta %}
+        <h3>Resultados por Fuerza Bruta:</h3>
+        <ul>
+            {% for clave, texto in resultados_bruta %}
+                <li><strong>Clave {{ clave }}:</strong> {{ texto }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <br>
+    <a href="/"><button>Volver al inicio</button></a>
+</body>
+</html>
