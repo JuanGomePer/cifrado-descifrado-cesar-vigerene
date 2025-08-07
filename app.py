@@ -27,7 +27,10 @@ def cesar():
                 return render_template("cesar.html", resultado=resultado)
 
         if accion == "cifrar":
-            resultado = cifrado_cesar(texto, clave)
+            if not clave_raw:
+                resultado = "Debes ingresar una clave numérica para cifrar."
+            else:
+                resultado = cifrado_cesar(texto, clave)
         elif accion == "descifrar" and clave_raw:
             resultado = descifrado_cesar(texto, clave)
         elif accion == "descifrar" and not clave_raw:
@@ -53,7 +56,11 @@ def vigenere():
         
         elif accion == "descifrar":
             if mensaje and clave:
-                resultado = vigenere_descifrar(mensaje, clave)
+                diccionario = cargar_diccionario("diccionario.txt", 100)
+                if clave.upper() not in diccionario:
+                    resultado = "No se ha podido descifrar: la clave no está en el diccionario."
+                else:
+                    resultado = vigenere_descifrar(mensaje, clave)
             elif mensaje and not clave:
                 diccionario = cargar_diccionario("diccionario.txt", 100)
                 resultados_bruta = vigenere_fuerza_bruta(mensaje, diccionario)
@@ -61,6 +68,7 @@ def vigenere():
                 resultado = "Debes ingresar un mensaje para descifrar."
 
     return render_template("vigenere.html", resultado=resultado, resultados_bruta=resultados_bruta)
+
 
     resultado = ""
     resultados_bruta = []

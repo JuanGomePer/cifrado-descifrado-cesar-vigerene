@@ -2,28 +2,38 @@ def limpiar_texto(texto):
     return ''.join([c.upper() for c in texto if c.isalpha()])
 
 def vigenere_cifrar(mensaje, clave):
-    mensaje = limpiar_texto(mensaje)
-    clave = limpiar_texto(clave)
+    clave = ''.join([c.upper() for c in clave if c.isalpha()])
     resultado = []
+    j = 0  # índice para clave
 
-    for i, letra in enumerate(mensaje):
-        m = ord(letra) - ord('A')
-        k = ord(clave[i % len(clave)]) - ord('A')
-        c = (m + k) % 26
-        resultado.append(chr(c + ord('A')))
+    for caracter in mensaje:
+        if caracter.isalpha():
+            base = ord('A') if caracter.isupper() else ord('a')
+            m = ord(caracter) - base
+            k = ord(clave[j % len(clave)]) - ord('A')
+            c = (m + k) % 26
+            resultado.append(chr(c + base))
+            j += 1
+        else:
+            resultado.append(caracter)  # conserva espacios y símbolos
 
     return ''.join(resultado)
 
 def vigenere_descifrar(mensaje_cifrado, clave):
-    mensaje_cifrado = limpiar_texto(mensaje_cifrado)
-    clave = limpiar_texto(clave)
+    clave = ''.join([c.upper() for c in clave if c.isalpha()])
     resultado = []
+    j = 0
 
-    for i, letra in enumerate(mensaje_cifrado):
-        c = ord(letra) - ord('A')
-        k = ord(clave[i % len(clave)]) - ord('A')
-        m = (c - k + 26) % 26
-        resultado.append(chr(m + ord('A')))
+    for caracter in mensaje_cifrado:
+        if caracter.isalpha():
+            base = ord('A') if caracter.isupper() else ord('a')
+            c = ord(caracter) - base
+            k = ord(clave[j % len(clave)]) - ord('A')
+            m = (c - k + 26) % 26
+            resultado.append(chr(m + base))
+            j += 1
+        else:
+            resultado.append(caracter)
 
     return ''.join(resultado)
 
